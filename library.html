@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Way B &mdash; keycloak-js</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Way B &mdash; keycloak-js</h1>
+    <p><a href="index.html">back</a> &middot; code: <code>js/library.js</code></p>
+
+    <p>
+      <button id="login">Sign in</button>
+      <button id="refresh" hidden>Refresh token (forced)</button>
+      <button id="check" hidden>updateToken(5)</button>
+      <button id="logout" hidden>Sign out</button>
+    </p>
+
+    <pre id="output"></pre>
+
+    <!-- Klassisches Script, setzt window.Keycloak. Muss vor dem Modul kommen.
+         Es muss keycloak.js sein, nicht keycloak.mjs - Begründung in
+         vendor/keycloak-LICENSE.txt und im Kopf von js/library.js. -->
+    <script src="vendor/keycloak.js"></script>
+    <script type="module" src="js/library.js"></script>
+  </body>
+</html>

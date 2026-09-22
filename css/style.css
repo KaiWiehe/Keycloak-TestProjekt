@@ -1,0 +1,71 @@
+/* Absichtlich minimal. Die Erklärung steht im JavaScript, nicht auf der Seite. */
+
+body {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font: 15px/1.5 system-ui, sans-serif;
+  color: #16202c;
+  background: #fff;
+}
+
+h1 {
+  font-size: 1.2rem;
+}
+
+button,
+.button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.4rem;
+  border: 1px solid #b9c2cc;
+  border-radius: 5px;
+  background: #f4f6f8;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+.button:hover {
+  border-color: #1f6feb;
+  color: #1f6feb;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+pre {
+  padding: 1rem;
+  border: 1px solid #e0e4e9;
+  border-radius: 5px;
+  background: #f7f8fa;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  font-size: 0.92em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #e6edf3;
+    background: #11161c;
+  }
+  button,
+  .button {
+    border-color: #2c3743;
+    background: #1b232c;
+  }
+  pre {
+    border-color: #2c3743;
+    background: #161c23;
+  }
+  a {
+    color: #6aa9ff;
+  }
+}

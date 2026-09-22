@@ -1,0 +1,31 @@
+keycloak.js
+===========
+
+Unmodified copy of keycloak-js, version 24.0.2.
+
+Source:  Seschat/Client/node_modules/keycloak-js/dist/keycloak.js
+Project: https://github.com/keycloak/keycloak
+License: Apache License 2.0 (Copyright 2016 Red Hat, Inc. and/or its affiliates)
+
+The full license header is still at the top of the file and was not removed.
+License text: http://www.apache.org/licenses/LICENSE-2.0
+
+Why this file and not keycloak.mjs
+----------------------------------
+The package ships three builds:
+
+  keycloak.mjs      ES module. Imports `js-sha256` and `jwt-decode` by bare
+                    package name, which a browser cannot resolve without a
+                    bundler or an import map. NOT usable for this project.
+
+  keycloak.js       UMD bundle with both dependencies inlined. Loads via
+                    <script src> and sets window.Keycloak. This is the file
+                    used here.
+
+  keycloak.min.js   The same, only unreadable. Pointless for a teaching
+                    project whose whole purpose is to look inside.
+
+Why the file is vendored
+------------------------
+The project is meant to run without `npm install`. Apache 2.0 permits
+redistribution as long as the license notice is preserved, which it is.
