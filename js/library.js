@@ -161,7 +161,7 @@ const initialize = async () => {
   log('init() — processes a callback if one is present in the URL')
 
   const authenticated = await keycloak.init({
-    //onLoad: 'login-required',
+    //onLoad: 'login-required', // Direkt weiterleiten, wenn nicht angemeldet. Seschat macht das so, hier Knopf drücken.
     // Keine periodische Iframe-Prüfung gegen den Keycloak. Spart Dauer-Traffic
     // und umgeht die Third-Party-Cookie-Sperren moderner Browser. Der Preis:
     // Wird die Sitzung woanders beendet, fällt das erst beim nächsten
