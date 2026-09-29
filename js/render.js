@@ -4,7 +4,10 @@
 // Alles läuft über createElement/textContent, nie über innerHTML — Token-Inhalte
 // landen also nie als Markup auf der Seite.
 
-const TIME_KEYS = new Set(['exp', 'iat', 'nbf', 'auth_time'])
+// Unix-Sekunden erkennt man am Wert, nicht am Key: exp, iat, nbf, auth_time,
+// aber auch expBefore/expAfter usw. Der Bereich (2001 bis 2286) trifft keine
+// Längen, Zähler oder Laufzeiten.
+const isUnixSeconds = value => Number.isInteger(value) && value >= 1e9 && value < 1e10
 
 const span = (className, text) => {
   const element = document.createElement('span')
@@ -13,8 +16,8 @@ const span = (className, text) => {
   return element
 }
 
-/** Ein Wert samt Einrückung als DOM-Knoten. `key` dient nur der Zeitanzeige. */
-const renderValue = (value, depth, key) => {
+/** Ein Wert samt Einrückung als DOM-Knoten. */
+const renderValue = (value, depth) => {
   const fragment = document.createDocumentFragment()
   const indent = '  '.repeat(depth)
 
@@ -33,7 +36,7 @@ const renderValue = (value, depth, key) => {
         if (!isArray) {
           fragment.append(span('j-key', JSON.stringify(entryKey)), ': ')
         }
-        fragment.append(renderValue(entryValue, depth + 1, entryKey))
+        fragment.append(renderValue(entryValue, depth + 1))
         fragment.append(index < entries.length - 1 ? ',\n' : '\n')
       })
       fragment.append(`${indent}${close}`)
@@ -47,7 +50,7 @@ const renderValue = (value, depth, key) => {
     }
   } else if (typeof value === 'number') {
     fragment.append(span('j-num', String(value)))
-    if (TIME_KEYS.has(key) && value > 1e9) {
+    if (isUnixSeconds(value)) {
       fragment.append(span('j-hint', `  // ${new Date(value * 1000).toLocaleString()}`))
     }
   } else if (typeof value === 'boolean') {
