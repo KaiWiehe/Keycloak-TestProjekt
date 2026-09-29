@@ -82,6 +82,7 @@ const config = loaded.config
 mountConfigPanel(document.getElementById('config'), loaded)
 
 import { createLogger } from './render.js'
+import { CLAIM_HELP } from './claims.js'
 
 const { log, logError } = createLogger(document.getElementById('output'), 'library')
 
@@ -344,7 +345,7 @@ const start = async () => {
     return
   }
 
-  log('Access token claims (keycloak.tokenParsed)', keycloak.tokenParsed)
+  log('Access token claims (keycloak.tokenParsed)', keycloak.tokenParsed, CLAIM_HELP)
   const granted = checkReactAuth()
   updateButtons(true)
   if (!granted) log('At this point a real application would show a denial page instead of its content.')

@@ -1,6 +1,8 @@
 // Darstellung der Ausgabe: ein Eintrag pro Schritt, JSON eingerückt und farbig.
 // Nur Anzeige. Der Ablauf steht in manual.js und library.js.
 //
+import { UNKNOWN_CLAIM } from './claims.js'
+
 // Alles läuft über createElement/textContent, nie über innerHTML — Token-Inhalte
 // landen also nie als Markup auf der Seite.
 
@@ -61,9 +63,28 @@ const renderValue = (value, depth) => {
   return fragment
 }
 
-/** Gleiche Signatur wie die alten log/logError, damit die Aufrufer gleich bleiben. */
+/** Aufklappbare Liste "Key: Erklärung" für alle Top-Level-Keys von `data`. */
+const renderHelp = (data, help) => {
+  const list = document.createElement('dl')
+  list.className = 'help'
+  list.hidden = true
+  for (const key of Object.keys(data)) {
+    const term = document.createElement('dt')
+    term.append(span('j-key', key))
+    const description = document.createElement('dd')
+    description.textContent = help[key] ?? UNKNOWN_CLAIM
+    list.append(term, description)
+  }
+  return list
+}
+
+/**
+ * Gleiche Signatur wie die alten log/logError, damit die Aufrufer gleich bleiben.
+ * Mit `help` (Key -> Erklärung) bekommt der Eintrag ein kleines "?", das die
+ * Erklärungen zu den Keys der Daten ein- und ausblendet.
+ */
 export const createLogger = (outputElement, prefix) => {
-  const log = (message, data) => {
+  const log = (message, data, help) => {
     const text = data === undefined || typeof data === 'string' ? '' : JSON.stringify(data, null, 2)
     console.log(`[${prefix}] ${data === undefined ? message : `${message}\n${typeof data === 'string' ? data : text}`}`)
 
@@ -73,6 +94,22 @@ export const createLogger = (outputElement, prefix) => {
     const title = document.createElement('h2')
     title.textContent = message
     entry.append(title)
+
+    const helpList = help && data && typeof data === 'object' ? renderHelp(data, help) : null
+    if (helpList) {
+      const toggle = document.createElement('button')
+      toggle.type = 'button'
+      toggle.className = 'help-toggle'
+      toggle.textContent = '?'
+      toggle.title = 'Keys erklären'
+      toggle.setAttribute('aria-expanded', 'false')
+      toggle.addEventListener('click', () => {
+        helpList.hidden = !helpList.hidden
+        toggle.setAttribute('aria-expanded', String(!helpList.hidden))
+      })
+      title.append(' ', toggle)
+      entry.append(helpList)
+    }
 
     if (data !== undefined) {
       const body = document.createElement('pre')

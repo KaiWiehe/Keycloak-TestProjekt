@@ -107,6 +107,7 @@ let session = null
 // ----------------------------------------------------------------------------
 
 import { createLogger } from './render.js'
+import { CLAIM_HELP } from './claims.js'
 
 const { log, logError } = createLogger(document.getElementById('output'), 'manual')
 
@@ -400,7 +401,7 @@ const handleCallback = async callback => {
     log('7. Nonce in the id_token verified — matches')
   }
 
-  log('8. Tokens decoded — access token claims', session.accessClaims)
+  log('8. Tokens decoded — access token claims', session.accessClaims, CLAIM_HELP)
 }
 
 // ============================================================================
