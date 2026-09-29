@@ -75,9 +75,11 @@
 // ============================================================================
 
 /** Siehe manual.js §0 — dynamisch, damit eine fehlende config.js auffällt. */
-const config = await import('../config.js')
-  .then(module => module.KEYCLOAK_CONFIG)
-  .catch(() => null)
+import { loadConfig, mountConfigPanel } from './config-panel.js'
+
+const loaded = await loadConfig()
+const config = loaded.config
+mountConfigPanel(document.getElementById('config'), loaded)
 
 import { createLogger } from './render.js'
 

@@ -59,9 +59,11 @@
  * laden — die Seite bliebe stumm, ohne jeden Hinweis. So gibt es stattdessen
  * eine Meldung, die sagt, was zu tun ist.
  */
-const config = await import('../config.js')
-  .then(module => module.KEYCLOAK_CONFIG)
-  .catch(() => null)
+import { loadConfig, mountConfigPanel } from './config-panel.js'
+
+const loaded = await loadConfig()
+const config = loaded.config
+mountConfigPanel(document.getElementById('config'), loaded)
 
 /**
  * Die vier OIDC-Adressen eines Realms. Keycloak veröffentlicht sie auch unter

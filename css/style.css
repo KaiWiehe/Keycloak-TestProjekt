@@ -142,6 +142,58 @@ button:disabled {
   color: var(--muted);
 }
 
+/* Konfiguration */
+.config {
+  margin: 0 0 1.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.config summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.config small {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.config-form {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.config-form label {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.config-form input {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: inherit;
+  font: 13px var(--mono);
+}
+
+.config-form .actions {
+  margin: 0.25rem 0 0;
+}
+
+.config-message {
+  margin: 0;
+  color: var(--bad);
+}
+
+.config-message:empty {
+  display: none;
+}
+
 /* Ausgabe: ein Eintrag pro Schritt */
 .entry {
   margin: 0 0 0.75rem;
