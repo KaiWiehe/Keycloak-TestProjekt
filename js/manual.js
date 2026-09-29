@@ -104,15 +104,9 @@ let session = null
 //  Absichtlich primitiv — der Ablauf soll im Vordergrund stehen, nicht das UI.
 // ----------------------------------------------------------------------------
 
-const outputElement = document.getElementById('output')
+import { createLogger } from './render.js'
 
-const log = (message, data) => {
-  const line = data === undefined ? message : `${message}\n${typeof data === 'string' ? data : JSON.stringify(data, null, 2)}`
-  console.log(`[manual] ${line}`)
-  outputElement.textContent += `${line}\n\n`
-}
-
-const logError = message => log(`ERROR: ${message}`)
+const { log, logError } = createLogger(document.getElementById('output'), 'manual')
 
 // ============================================================================
 //  §1  TOOLING

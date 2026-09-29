@@ -79,15 +79,9 @@ const config = await import('../config.js')
   .then(module => module.KEYCLOAK_CONFIG)
   .catch(() => null)
 
-const outputElement = document.getElementById('output')
+import { createLogger } from './render.js'
 
-const log = (message, data) => {
-  const line = data === undefined ? message : `${message}\n${typeof data === 'string' ? data : JSON.stringify(data, null, 2)}`
-  console.log(`[library] ${line}`)
-  outputElement.textContent += `${line}\n\n`
-}
-
-const logError = message => log(`ERROR: ${message}`)
+const { log, logError } = createLogger(document.getElementById('output'), 'library')
 
 /**
  * Wohin Keycloak zurückleiten soll. Ohne diese Angabe nimmt keycloak-js

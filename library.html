@@ -8,16 +8,16 @@
   </head>
   <body>
     <h1>Way B &mdash; keycloak-js</h1>
-    <p><a href="index.html">back</a> &middot; code: <code>js/library.js</code></p>
+    <p class="subtitle"><a href="index.html">back</a> &middot; code: <code>js/library.js</code></p>
 
-    <p>
+    <div class="actions">
       <button id="login">Sign in</button>
       <button id="refresh" hidden>Refresh token (forced)</button>
       <button id="check" hidden>updateToken(5)</button>
       <button id="logout" hidden>Sign out</button>
-    </p>
+    </div>
 
-    <pre id="output"></pre>
+    <div id="output"></div>
 
     <!-- Klassisches Script, setzt window.Keycloak. Muss vor dem Modul kommen.
          Es muss keycloak.js sein, nicht keycloak.mjs - Begründung in

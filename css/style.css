@@ -1,25 +1,85 @@
-/* Absichtlich minimal. Die Erklärung steht im JavaScript, nicht auf der Seite. */
+/* Schlicht gehalten. Die Erklärung steht im JavaScript, nicht auf der Seite. */
+
+:root {
+  --text: #16202c;
+  --muted: #667382;
+  --bg: #f6f7f9;
+  --card: #fff;
+  --border: #e0e4e9;
+  --accent: #1f6feb;
+  --ok: #1a7f37;
+  --bad: #cf222e;
+  --j-key: #0550ae;
+  --j-str: #0a6b2d;
+  --j-num: #b35900;
+  --j-bool: #8250df;
+  --j-null: #6e7781;
+  --mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e6edf3;
+    --muted: #8b98a6;
+    --bg: #0d1117;
+    --card: #161c23;
+    --border: #2c3743;
+    --accent: #6aa9ff;
+    --ok: #3fb950;
+    --bad: #ff7b72;
+    --j-key: #79c0ff;
+    --j-str: #7ee787;
+    --j-num: #ffa657;
+    --j-bool: #d2a8ff;
+    --j-null: #8b949e;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
 
 body {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  font: 15px/1.5 system-ui, sans-serif;
-  color: #16202c;
-  background: #fff;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+  font: 15px/1.6 system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
 }
 
 h1 {
-  font-size: 1.2rem;
+  margin: 0 0 0.25rem;
+  font-size: 1.4rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+.subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
 }
 
 button,
 .button {
   padding: 0.5rem 1rem;
-  margin-right: 0.4rem;
-  border: 1px solid #b9c2cc;
-  border-radius: 5px;
-  background: #f4f6f8;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
   color: inherit;
   font: inherit;
   text-decoration: none;
@@ -28,8 +88,14 @@ button,
 
 button:hover,
 .button:hover {
-  border-color: #1f6feb;
-  color: #1f6feb;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button:focus-visible,
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 button:disabled {
@@ -37,35 +103,97 @@ button:disabled {
   cursor: not-allowed;
 }
 
-pre {
-  padding: 1rem;
-  border: 1px solid #e0e4e9;
-  border-radius: 5px;
-  background: #f7f8fa;
-  font-size: 12.5px;
-  white-space: pre-wrap;
-  word-break: break-word;
+#login {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
 }
 
-code {
-  font-size: 0.92em;
+#login:hover {
+  opacity: 0.9;
+  color: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Startseite */
+.cards {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card {
+  display: block;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.card strong {
+  display: block;
+}
+
+.card span {
+  color: var(--muted);
+}
+
+/* Ausgabe: ein Eintrag pro Schritt */
+.entry {
+  margin: 0 0 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+.entry.error {
+  border-left-color: var(--bad);
+}
+
+.entry.error h2 {
+  color: var(--bad);
+}
+
+.entry h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.entry pre {
+  margin: 0.6rem 0 0;
+  font: 12.5px/1.6 var(--mono);
+  overflow-x: auto;
+}
+
+.j-key { color: var(--j-key); }
+.j-str { color: var(--j-str); }
+.j-num { color: var(--j-num); }
+.j-bool { color: var(--j-bool); }
+.j-null { color: var(--j-null); }
+.j-hint { color: var(--muted); }
+
+.badge {
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.badge.ok { background: var(--ok); }
+.badge.bad { background: var(--bad); }
+
+@media (max-width: 480px) {
   body {
-    color: #e6edf3;
-    background: #11161c;
+    padding: 1.5rem 1rem;
   }
-  button,
-  .button {
-    border-color: #2c3743;
-    background: #1b232c;
-  }
-  pre {
-    border-color: #2c3743;
-    background: #161c23;
-  }
-  a {
-    color: #6aa9ff;
+  .actions button {
+    flex: 1 1 100%;
   }
 }

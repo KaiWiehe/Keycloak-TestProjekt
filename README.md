@@ -112,11 +112,12 @@ kein Versäumnis ist, steht im Kopf von `js/manual.js`.
 serve.js               Statik-Server, Node ohne Abhängigkeiten, fester Port 4180
 config.example.js      Vorlage für config.js (gitignored)
 index.html             zwei Links
-manual.html            ein paar Knöpfe und ein <pre>
+manual.html            ein paar Knöpfe und ein Ausgabe-Container
 library.html           dasselbe
 js/manual.js           << der Lehrstoff
 js/library.js          << der Lehrstoff
-css/style.css          70 Zeilen, damit es nicht wehtut
+js/render.js           nur Anzeige: Einträge und farbiges JSON
+css/style.css          schlichtes Styling, hell und dunkel
 vendor/keycloak.js     keycloak-js 24.0.2, unverändert (Apache 2.0)
 ```
 
